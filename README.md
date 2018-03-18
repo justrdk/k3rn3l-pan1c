@@ -18,3 +18,6 @@ create-react-native-app comes in very handy but need to be sure no need for libr
 - Learned about the `onLayout` event. Used to detect screen orientation change.
 
 Time to complete: ~5 hours (Was a fun challenge!)
+
+Instructions to run app are inside kernel-panic Readme.md
+But just need to: `yarn run ios` or `yarn run android`
