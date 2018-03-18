@@ -1,12 +1,14 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-native'
 import Day from './Day'
+import Header from './Header'
+import Footer from './Footer'
 
 const PORTRAIT = 'PORTRAIT'
 const LANDSCAPE = 'LANDSCAPE'
 
-const renderWeek = days => days.map((day, index) => <Day day={day.day} date={day.date} key={index}/>)
+const renderWeek = (days, selectDay) => days.map((day, index) => <Day day={day.day} date={day.date} key={index} selectDay={selectDay}/>)
 
 const CalendarNav = ({ onPress, text }) => <TouchableOpacity onPress={onPress}><Text>{text}</Text></TouchableOpacity>
 
@@ -19,6 +21,7 @@ class Calendar extends Component {
   state = {
     orientation: PORTRAIT,
     weekIndex: 0,
+    selectedDay: 'N/A'
   }
 
   detectScreenOrientation = (ev) => {
@@ -40,21 +43,40 @@ class Calendar extends Component {
     })
   }
 
+  selectDay = (day, date) => {
+    this.setState({
+      selectedDay: `${day}, ${date}`
+    })
+  }
+
+  loadRandomWeek = () => {
+    const { weeks } = this.props
+    const max = weeks.length - 1
+    this.setState({
+      weekIndex: Math.floor(Math.random() * Math.floor(max))
+    })
+  }
+
   render() {
     const { weeks } = this.props
-    const { orientation, weekIndex } = this.state
+    const { orientation, weekIndex, selectedDay } = this.state
     const daysToShow = orientation === PORTRAIT ? weeks[weekIndex].days.slice(0, 5) : weeks[weekIndex].days
 
     return (
-      <Fragment>
+      <View style={styles.container}>
+        <Header loadRandomWeek={this.loadRandomWeek} />
         <View style={styles.calendarNav}>
           {weekIndex > 0 && <CalendarNav onPress={this.back} text={"Prev Week"} />}
           {(weekIndex < weeks.length - 1) && <CalendarNav onPress={this.next} text={"Next Week"} />}
         </View>
         <View onLayout={this.detectScreenOrientation} style={styles.calendar}>
-          {renderWeek(daysToShow)}
+          {renderWeek(daysToShow, this.selectDay)}
         </View>
-      </Fragment>
+        <View style={styles.dateDescription}>
+          <Text>Selected Day: {selectedDay}</Text>
+        </View>
+        <Footer />
+      </View>
     )
   }
 }
@@ -68,6 +90,9 @@ Calendar.defaultProps = {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   calendar: {
     height: 200,
     flexDirection: 'row',
@@ -78,7 +103,15 @@ const styles = StyleSheet.create({
     height: 40,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#e84393'
+  },
+  dateDescription: {
+    height: 40,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    backgroundColor: '#ff7675'
   }
 })
 

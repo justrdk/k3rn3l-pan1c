@@ -3,16 +3,6 @@ import { StyleSheet, View } from 'react-native'
 import Calendar, { Header, Footer } from './components'
 import weeks from './weeks'
 
-const App = () => <View style={styles.container}>
-  <Header />
-  <Calendar weeks={weeks.weeks} />
-  <Footer />
-</View>
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-})
+const App = () => <Calendar weeks={weeks.weeks} />
 
 export default App
