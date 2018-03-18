@@ -22,5 +22,51 @@ export default {
       day: 'SUN',
       date: 7,
     }]
+  }, {
+    days: [{
+      day: 'MON',
+      date: 8,
+    }, {
+      day: 'TUS',
+      date: 9,
+    }, {
+      day: 'WED',
+      date: 10,
+    }, {
+      day: 'THU',
+      date: 11,
+    }, {
+      day: 'FRI',
+      date: 12,
+    }, {
+      day: 'SAT',
+      date: 13,
+    }, {
+      day: 'SUN',
+      date: 14,
+    }]
+  }, {
+    days: [{
+      day: 'MON',
+      date: 15,
+    }, {
+      day: 'TUS',
+      date: 16,
+    }, {
+      day: 'WED',
+      date: 17,
+    }, {
+      day: 'THU',
+      date: 18,
+    }, {
+      day: 'FRI',
+      date: 19,
+    }, {
+      day: 'SAT',
+      date: 20,
+    }, {
+      day: 'SUN',
+      date: 21,
+    }]
   }]
 }
