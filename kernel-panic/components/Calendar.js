@@ -18,10 +18,23 @@ CalendarNav.propTypes = {
 }
 
 class Calendar extends Component {
-  state = {
-    orientation: PORTRAIT,
-    weekIndex: 0,
-    selectedDay: 'N/A'
+  constructor(props) {
+    super(props);
+    this.state = {
+      orientation: PORTRAIT,
+      weekIndex: 0,
+      selectedDay: 'N/A',
+      weeks: this.props.weeks
+    }
+  }
+
+  componentDidMount() {
+    const { asyncWeeks, serviceCall, url, options } = this.props
+    if (asyncWeeks === true) {
+      serviceCall(url, options)
+        .then(response.json())
+        .then(({ weeks }) => this.setState({ weeks }))
+    }
   }
 
   detectScreenOrientation = (ev) => {
@@ -50,7 +63,7 @@ class Calendar extends Component {
   }
 
   loadRandomWeek = () => {
-    const { weeks } = this.props
+    const { weeks } = this.state
     const max = weeks.length - 1
     this.setState({
       weekIndex: Math.floor(Math.random() * Math.floor(max))
@@ -58,7 +71,7 @@ class Calendar extends Component {
   }
 
   render() {
-    const { weeks } = this.props
+    const { weeks } = this.state
     const { orientation, weekIndex, selectedDay } = this.state
     const daysToShow = orientation === PORTRAIT ? weeks[weekIndex].days.slice(0, 5) : weeks[weekIndex].days
 
@@ -74,6 +87,7 @@ class Calendar extends Component {
         </View>
         <View style={styles.dateDescription}>
           <Text>Selected Day: {selectedDay}</Text>
+          <Text>Current Week: {weekIndex}</Text>
         </View>
         <Footer />
       </View>
@@ -82,11 +96,16 @@ class Calendar extends Component {
 }
 
 Calendar.propTypes = {
-  weeks: PropTypes.array
+  weeks: PropTypes.array,
+  asyncWeeks: PropTypes.bool,
+  serviceCall: PropTypes.func,
+  url: PropTypes.string,
+  options: PropTypes.object
 }
 
 Calendar.defaultProps = {
-  weeks: []
+  weeks: [],
+  asyncWeeks: false
 }
 
 const styles = StyleSheet.create({
