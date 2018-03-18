@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native'
 import Calendar, { Header, Footer } from './components'
-import week from './week'
+import weeks from './weeks'
 
 const App = () => <View style={styles.container}>
   <Header />
-  <Calendar week={week} />
+  <Calendar weeks={weeks.weeks} />
   <Footer />
 </View>
 

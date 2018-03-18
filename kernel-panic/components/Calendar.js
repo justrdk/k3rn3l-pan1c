@@ -6,28 +6,32 @@ import Day from './Day'
 const PORTRAIT = 'PORTRAIT'
 const LANDSCAPE = 'LANDSCAPE'
 
-const renderWeek = week => Object.keys(week).map((day, index) => <Day day={day} date={week[day]} key={index} />)
+const renderWeek = days => days.map((day, index) => <Day day={day.day} date={day.date} key={index} />)
 
 class Calendar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      orientation: PORTRAIT
+      orientation: PORTRAIT,
+      weekIndex: 0
     }
   }
 
   detectScreenOrientation = (ev) => {
     const { width, height } = Dimensions.get('window')
-    this.setState = {
+    this.setState({
       orientation: width > height ? LANDSCAPE : PORTRAIT
-    }
+    })
   }
 
   render() {
-    const { week } = this.props
+    const { weeks } = this.props
+    const { orientation, weekIndex } = this.state
+    const daysToShow = orientation === PORTRAIT ? weeks[weekIndex].days.slice(0, 5) : weeks[weekIndex].days
+
     return (
-      <View onLayout={this.detectScreenOrientation}  style={styles.calendar}>
-        {renderWeek(week)}
+      <View onLayout={this.detectScreenOrientation} style={styles.calendar}>
+        {renderWeek(daysToShow)}
       </View>)
   }
 }
