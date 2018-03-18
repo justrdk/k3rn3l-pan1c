@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 const Footer = () => <View style={styles.footer}>
-  <Text>By Osman Hernandez</Text>
+  <Text style={styles.footerText}>By Osman Hernandez</Text>
 </View>
 
 const styles = StyleSheet.create({
@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#00b894',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  footerText: {
+  	color: '#0984e3',
+  	fontSize: 20
   }
 })
 

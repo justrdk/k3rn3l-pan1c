@@ -9,12 +9,9 @@ const LANDSCAPE = 'LANDSCAPE'
 const renderWeek = days => days.map((day, index) => <Day day={day.day} date={day.date} key={index} />)
 
 class Calendar extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      orientation: PORTRAIT,
-      weekIndex: 0
-    }
+  state = {
+    orientation: PORTRAIT,
+    weekIndex: 0
   }
 
   detectScreenOrientation = (ev) => {
@@ -38,7 +35,7 @@ class Calendar extends Component {
 
 const styles = StyleSheet.create({
   calendar: {
-    flex: 1,
+    height: 150,
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#ff7675',
