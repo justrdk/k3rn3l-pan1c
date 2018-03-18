@@ -8,8 +8,12 @@ const LANDSCAPE = 'LANDSCAPE'
 
 const renderWeek = days => days.map((day, index) => <Day day={day.day} date={day.date} key={index}/>)
 
-const BackArrow = ({ onPress }) => <TouchableOpacity onPress={onPress}><Text>Prev Week</Text></TouchableOpacity>
-const NextArrow = ({ onPress }) => <TouchableOpacity onPress={onPress}><Text>Next Week</Text></TouchableOpacity>
+const CalendarNav = ({ onPress, text }) => <TouchableOpacity onPress={onPress}><Text>{text}</Text></TouchableOpacity>
+
+CalendarNav.propTypes = {
+  onPress: PropTypes.func,
+  text: PropTypes.string
+}
 
 class Calendar extends Component {
   state = {
@@ -44,8 +48,8 @@ class Calendar extends Component {
     return (
       <Fragment>
         <View style={styles.calendarNav}>
-          {weekIndex > 0 && <BackArrow onPress={this.back} />}
-          {(weekIndex < weeks.length - 1) && <NextArrow onPress={this.next} />}
+          {weekIndex > 0 && <CalendarNav onPress={this.back} text={"Prev Week"} />}
+          {(weekIndex < weeks.length - 1) && <CalendarNav onPress={this.next} text={"Next Week"} />}
         </View>
         <View onLayout={this.detectScreenOrientation} style={styles.calendar}>
           {renderWeek(daysToShow)}
@@ -53,6 +57,14 @@ class Calendar extends Component {
       </Fragment>
     )
   }
+}
+
+Calendar.propTypes = {
+  weeks: PropTypes.array
+}
+
+Calendar.defaultProps = {
+  weeks: []
 }
 
 const styles = StyleSheet.create({
