@@ -7,7 +7,7 @@ First challenge was thinking of the UI and UX of the application. Luckily I didn
 Had some challenges on sharing events between components, could have been easier with redux since actions would be global but this app was too small to use redux for it. This is why I decided to render Header and Footer Components within the Calendar render function instead of the root component.
 
 ## Roadblocks
-Had some erros regarding this context on functions passed down to children components. I decided to define all internal functions of the Calendar class as arrow functions to avoid headaches of binding this to the correct context. Environment issues with java to be able to test on android. No issues with IOS
+Had some errors regarding `this` context on functions passed down to children components. I decided to define all internal functions of the Calendar class as arrow functions to avoid headaches of binding this to the correct context. Environment issues with java to be able to test on android. No issues with IOS
 
 ## Lessons Learned
 - No need to define a constructor and super the props if `this.props` won't be used inside the constructor.
