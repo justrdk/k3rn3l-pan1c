@@ -21,3 +21,4 @@ Time to complete: ~5 hours (Was a fun challenge!)
 
 Instructions to run app are inside kernel-panic Readme.md
 But just need to: `yarn run ios` or `yarn run android`
+To modify the data of weeks, modify file: `weeks.js` on the root of the project.
